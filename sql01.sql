@@ -1,3 +1,5 @@
+create database trabalho_bdii;
+
 create table cliente(
 IDCliente int primary key auto_increment,
 Nome varchar (100) not null,
@@ -57,7 +59,7 @@ DatResg date not null,
 DescResg text,
 Status enum('Ativo', 'Inativo'),
 Titulo varchar(225),
-foreign key (LocalArmaz) references armazenamento (LocalArmaz) ON DELETE SET,
+foreign key (LocalArmaz) references armazenamento (LocalArmaz) ON DELETE CASCADE,
 DatAtt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
