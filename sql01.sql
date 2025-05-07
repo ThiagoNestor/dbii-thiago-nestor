@@ -122,7 +122,7 @@ DatAtt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('O Pequeno Príncipe do Sayajin', '2005-08-12', 'Goku DiCaprio', 'Fantasia', '2021-03-22');
 INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('Código Naruto', '2011-06-24', 'Naruto Hanks', 'Mistério', '2023-11-05');
-INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('Orgulho e One Piece', '2003-02-17', 'Luffy Depp', 'Romance', '2022-07-14'),
+INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('Orgulho e One Piece', '2003-02-17', 'Luffy Depp', 'Romance', '2022-07-14');
 INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('Harry Potter e o Samurai Perdido', '2015-09-30', 'Kenshin Radcliffe', 'Aventura', '2024-05-02');
 INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('Crime e Death Note', '2008-12-05', 'Light Pacino', 'Suspense', '2021-10-29');
 INSERT INTO obra (Titulo, DatPubli, Autor, Tema, DatAtt) VALUES ('As Crônicas de Bleach', '2002-04-21', 'Ichigo Freeman', 'Fantasia', '2023-06-19');
@@ -230,7 +230,7 @@ CREATE TABLE escolha (
     FOREIGN KEY (IDObra) REFERENCES obra(IDObra)
 );
 
-----
+
 create table compra_aluguel(
 IDCompAlg int primary key auto_increment,
 IDCliente int,
@@ -241,7 +241,6 @@ MetPag varchar(50) not null,
 foreign key (IDcliente) references cliente(IDCliente) ON DELETE CASCADE,
 DatAtt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 INSERT INTO compra_aluguel (DatCompAlg, Preco, TipoCompAlg, MetPag) VALUES ('2021-03-15', 149.99, 'Compra', 'Cartão de Crédito');
 INSERT INTO compra_aluguel (DatCompAlg, Preco, TipoCompAlg, MetPag) VALUES ('2022-06-10', 85.50, 'Aluguel', 'Pix');
 INSERT INTO compra_aluguel (DatCompAlg, Preco, TipoCompAlg, MetPag) VALUES ('2023-09-22', 215.75, 'Compra', 'Boleto');
@@ -889,7 +888,7 @@ foreign key (LocalArmaz) references armazenamento (LocalArmaz) ON DELETE CASCADE
 DatAssociacao date not null
 );
 
----
+
 create table e(
 IDCompAlg int,
 IDResg int not null,
@@ -909,107 +908,106 @@ ItemAdd varchar (225),
 DatAtt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 ItemAdd varchar (225)
 );
-INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES
-('ExclusÃ£o', '2023-06-10', 'Livro removido por obsolescÃªncia.', 'A Sombra do Vento'),
-('CorreÃ§Ã£o', '2022-09-04', 'Livro removido por obsolescÃªncia.', 'Os MiserÃ¡veis'),
-('CorreÃ§Ã£o', '2021-08-19', 'Livro duplicado removido.', 'Os MiserÃ¡veis'),
-('ExclusÃ£o', '2024-12-21', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Cem Anos de SolidÃ£o'),
-('ExclusÃ£o', '2022-08-03', 'Novo livro adicionado ao acervo.', 'Frankenstein'),
-('ExclusÃ£o', '2024-05-25', 'CorreÃ§Ã£o na editora cadastrada.', 'O Alquimista'),
-('ExclusÃ£o', '2025-02-20', 'CorreÃ§Ã£o na editora cadastrada.', 'A Sombra do Vento'),
-('InserÃ§Ã£o', '2024-10-03', 'Novo exemplar fÃ­sico incluÃ­do.', 'O CortiÃ§o'),
-('CorreÃ§Ã£o', '2022-11-29', 'Novo tÃ­tulo registrado.', 'O Alquimista'),
-('ExclusÃ£o', '2023-10-20', 'Novo livro adicionado ao acervo.', 'O Hobbit'),
-('InserÃ§Ã£o', '2022-04-15', 'Livro duplicado removido.', 'O Alquimista'),
-('AtualizaÃ§Ã£o', '2024-11-10', 'Novo tÃ­tulo registrado.', 'Frankenstein'),
-('InserÃ§Ã£o', '2022-07-14', 'Livro removido por obsolescÃªncia.', 'O Senhor dos AnÃ©is'),
-('ExclusÃ£o', '2021-07-25', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'DrÃ¡cula'),
-('ExclusÃ£o', '2024-08-13', 'Livro duplicado removido.', 'O Alquimista'),
-('ExclusÃ£o', '2022-11-11', 'Novo livro adicionado ao acervo.', 'Jogos Vorazes'),
-('CorreÃ§Ã£o', '2024-10-07', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Alquimista'),
-('AtualizaÃ§Ã£o', '2023-08-26', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A RevoluÃ§Ã£o dos Bichos'),
-('InserÃ§Ã£o', '2021-03-24', 'MudanÃ§a no local de armazenamento.', 'A Sombra do Vento'),
-('InserÃ§Ã£o', '2023-06-06', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'Os MiserÃ¡veis'),
-('CorreÃ§Ã£o', '2022-02-01', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Hobbit'),
-('AtualizaÃ§Ã£o', '2024-05-07', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'A RevoluÃ§Ã£o dos Bichos'),
-('CorreÃ§Ã£o', '2024-11-12', 'MudanÃ§a no local de armazenamento.', '1984'),
-('InserÃ§Ã£o', '2023-10-14', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A Sombra do Vento'),
-('InserÃ§Ã£o', '2024-12-08', 'Livro duplicado removido.', 'DrÃ¡cula'),
-('CorreÃ§Ã£o', '2021-09-14', 'Livro duplicado removido.', 'O Nome do Vento'),
-('InserÃ§Ã£o', '2025-03-17', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A Menina que Roubava Livros'),
-('CorreÃ§Ã£o', '2022-01-23', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'Cem Anos de SolidÃ£o'),
-('CorreÃ§Ã£o', '2021-11-09', 'Novo exemplar fÃ­sico incluÃ­do.', 'Os MiserÃ¡veis'),
-('InserÃ§Ã£o', '2022-08-04', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Alquimista'),
-('ExclusÃ£o', '2021-10-08', 'CorreÃ§Ã£o na editora cadastrada.', 'Os MiserÃ¡veis'),
-('AtualizaÃ§Ã£o', '2023-12-07', 'RemoÃ§Ã£o de exemplar danificado.', 'Crime e Castigo'),
-('AtualizaÃ§Ã£o', '2023-04-05', 'Livro duplicado removido.', 'O CortiÃ§o'),
-('AtualizaÃ§Ã£o', '2021-07-12', 'MudanÃ§a no local de armazenamento.', 'Jogos Vorazes'),
-('AtualizaÃ§Ã£o', '2024-02-19', 'Novo exemplar fÃ­sico incluÃ­do.', 'Jogos Vorazes'),
-('ExclusÃ£o', '2025-03-14', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'CapitÃ£es da Areia'),
-('ExclusÃ£o', '2024-05-05', 'Novo tÃ­tulo registrado.', 'O Alquimista'),
-('CorreÃ§Ã£o', '2022-05-02', 'Livro duplicado removido.', 'A Sombra do Vento'),
-('ExclusÃ£o', '2022-12-03', 'RevisÃ£o ortogrÃ¡fica registrada.', 'O Nome do Vento'),
-('InserÃ§Ã£o', '2024-02-05', 'Nova ediÃ§Ã£o substituiu anterior.', 'Dom Casmurro'),
-('ExclusÃ£o', '2023-07-13', 'AtualizaÃ§Ã£o da sinopse.', 'Frankenstein'),
-('InserÃ§Ã£o', '2025-01-02', 'AtualizaÃ§Ã£o de dados do autor.', 'O Alquimista'),
-('ExclusÃ£o', '2024-07-21', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'O CortiÃ§o'),
-('AtualizaÃ§Ã£o', '2024-08-13', 'Livro removido por obsolescÃªncia.', 'Crime e Castigo'),
-('AtualizaÃ§Ã£o', '2023-01-18', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', '1984'),
-('AtualizaÃ§Ã£o', '2021-08-12', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'O Alquimista'),
-('ExclusÃ£o', '2023-12-31', 'Livro removido por obsolescÃªncia.', 'Crime e Castigo'),
-('ExclusÃ£o', '2024-06-21', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'A RevoluÃ§Ã£o dos Bichos'),
-('CorreÃ§Ã£o', '2022-09-02', 'Livro duplicado removido.', 'Orgulho e Preconceito'),
-('AtualizaÃ§Ã£o', '2022-11-15', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Jogos Vorazes'),
-('InserÃ§Ã£o', '2024-07-29', 'InclusÃ£o de livro recÃ©m-adquirido.', 'Jogos Vorazes'),
-('CorreÃ§Ã£o', '2021-11-08', 'CorreÃ§Ã£o de ISBN.', 'Jogos Vorazes'),
-('InserÃ§Ã£o', '2021-12-02', 'Livro removido por obsolescÃªncia.', 'O Hobbit'),
-('ExclusÃ£o', '2021-02-14', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'DrÃ¡cula'),
-('CorreÃ§Ã£o', '2021-01-27', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'Orgulho e Preconceito'),
-('AtualizaÃ§Ã£o', '2024-04-25', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'O Senhor dos AnÃ©is'),
-('CorreÃ§Ã£o', '2022-08-19', 'AtualizaÃ§Ã£o da sinopse.', 'A Menina que Roubava Livros'),
-('ExclusÃ£o', '2022-11-29', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', '1984'),
-('AtualizaÃ§Ã£o', '2023-02-17', 'RemoÃ§Ã£o de exemplar danificado.', 'A RevoluÃ§Ã£o dos Bichos'),
-('CorreÃ§Ã£o', '2024-03-01', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Alquimista'),
-('CorreÃ§Ã£o', '2024-01-29', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', '1984'),
-('InserÃ§Ã£o', '2023-04-01', 'EdiÃ§Ã£o corrigida adicionada.', 'O Nome do Vento'),
-('InserÃ§Ã£o', '2022-08-23', 'RemoÃ§Ã£o de exemplar danificado.', 'A RevoluÃ§Ã£o dos Bichos'),
-('CorreÃ§Ã£o', '2023-06-22', 'Livro duplicado removido.', 'O Nome do Vento'),
-('ExclusÃ£o', '2023-07-01', 'Livro duplicado removido.', '1984'),
-('AtualizaÃ§Ã£o', '2022-04-23', 'Livro removido por obsolescÃªncia.', 'Os MiserÃ¡veis'),
-('AtualizaÃ§Ã£o', '2021-10-01', 'Livro duplicado removido.', 'A Menina que Roubava Livros'),
-('InserÃ§Ã£o', '2024-02-13', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Frankenstein'),
-('AtualizaÃ§Ã£o', '2022-03-27', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Crime e Castigo'),
-('AtualizaÃ§Ã£o', '2024-12-04', 'Novo tÃ­tulo registrado.', 'DrÃ¡cula'),
-('InserÃ§Ã£o', '2022-06-18', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Pequeno PrÃ­ncipe'),
-('InserÃ§Ã£o', '2022-09-02', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Senhor dos AnÃ©is'),
-('ExclusÃ£o', '2021-09-16', 'RemoÃ§Ã£o de exemplar danificado.', 'O Nome do Vento'),
-('AtualizaÃ§Ã£o', '2023-10-12', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Harry Potter e a Pedra Filosofal'),
-('AtualizaÃ§Ã£o', '2021-11-15', 'Nova ediÃ§Ã£o substituiu anterior.', 'Harry Potter e a Pedra Filosofal'),
-('AtualizaÃ§Ã£o', '2024-02-29', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'O Alquimista'),
-('InserÃ§Ã£o', '2022-08-28', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Hobbit'),
-('InserÃ§Ã£o', '2024-10-22', 'AtualizaÃ§Ã£o de dados do autor.', 'A RevoluÃ§Ã£o dos Bichos'),
-('CorreÃ§Ã£o', '2021-05-22', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Cem Anos de SolidÃ£o'),
-('CorreÃ§Ã£o', '2025-03-04', 'MudanÃ§a no local de armazenamento.', 'CapitÃ£es da Areia'),
-('ExclusÃ£o', '2022-02-02', 'Livro removido por obsolescÃªncia.', 'Frankenstein'),
-('AtualizaÃ§Ã£o', '2023-09-13', 'Nova ediÃ§Ã£o substituiu anterior.', 'Dom Casmurro'),
-('ExclusÃ£o', '2022-04-28', 'AtualizaÃ§Ã£o de dados do autor.', 'O CortiÃ§o'),
-('ExclusÃ£o', '2024-07-22', 'EdiÃ§Ã£o corrigida adicionada.', 'O CortiÃ§o'),
-('AtualizaÃ§Ã£o', '2025-04-20', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Hobbit'),
-('ExclusÃ£o', '2022-10-14', 'Novo tÃ­tulo registrado.', 'O Nome do Vento'),
-('CorreÃ§Ã£o', '2024-08-16', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Crime e Castigo'),
-('InserÃ§Ã£o', '2021-11-23', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', '1984'),
-('InserÃ§Ã£o', '2021-01-09', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'A Menina que Roubava Livros'),
-('AtualizaÃ§Ã£o', '2022-06-05', 'CorreÃ§Ã£o na editora cadastrada.', 'Os MiserÃ¡veis'),
-('AtualizaÃ§Ã£o', '2024-07-04', 'Livro removido por obsolescÃªncia.', 'O Nome do Vento'),
-('AtualizaÃ§Ã£o', '2021-12-14', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Orgulho e Preconceito'),
-('ExclusÃ£o', '2024-06-19', 'Novo livro adicionado ao acervo.', 'O Alquimista'),
-('InserÃ§Ã£o', '2021-07-07', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'Harry Potter e a Pedra Filosofal'),
-('CorreÃ§Ã£o', '2021-06-02', 'Novo livro adicionado ao acervo.', 'O CortiÃ§o'),
-('CorreÃ§Ã£o', '2024-05-20', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'A Menina que Roubava Livros'),
-('CorreÃ§Ã£o', '2021-01-14', 'Novo exemplar fÃ­sico incluÃ­do.', 'A Sombra do Vento'),
-('ExclusÃ£o', '2022-12-03', 'Livro duplicado removido.', 'O Alquimista'),
-('AtualizaÃ§Ã£o', '2024-10-08', 'EdiÃ§Ã£o corrigida adicionada.', 'O Alquimista'),
-('InserÃ§Ã£o', '2025-02-20', 'CorreÃ§Ã£o na editora cadastrada.', 'Harry Potter e a Pedra Filosofal');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2023-06-10', 'Livro removido por obsolescÃªncia.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-09-04', 'Livro removido por obsolescÃªncia.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-08-19', 'Livro duplicado removido.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-12-21', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Cem Anos de SolidÃ£o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-08-03', 'Novo livro adicionado ao acervo.', 'Frankenstein');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-05-25', 'CorreÃ§Ã£o na editora cadastrada.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2025-02-20', 'CorreÃ§Ã£o na editora cadastrada.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-10-03', 'Novo exemplar fÃ­sico incluÃ­do.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-11-29', 'Novo tÃ­tulo registrado.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2023-10-20', 'Novo livro adicionado ao acervo.', 'O Hobbit');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-04-15', 'Livro duplicado removido.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-11-10', 'Novo tÃ­tulo registrado.', 'Frankenstein');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-07-14', 'Livro removido por obsolescÃªncia.', 'O Senhor dos AnÃ©is');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2021-07-25', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'DrÃ¡cula');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-08-13', 'Livro duplicado removido.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-11-11', 'Novo livro adicionado ao acervo.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-10-07', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-08-26', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2021-03-24', 'MudanÃ§a no local de armazenamento.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2023-06-06', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-02-01', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Hobbit');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-05-07', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-11-12', 'MudanÃ§a no local de armazenamento.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2023-10-14', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-12-08', 'Livro duplicado removido.', 'DrÃ¡cula');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-09-14', 'Livro duplicado removido.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2025-03-17', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'A Menina que Roubava Livros');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-01-23', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'Cem Anos de SolidÃ£o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-11-09', 'Novo exemplar fÃ­sico incluÃ­do.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-08-04', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2021-10-08', 'CorreÃ§Ã£o na editora cadastrada.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-12-07', 'RemoÃ§Ã£o de exemplar danificado.', 'Crime e Castigo');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-04-05', 'Livro duplicado removido.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2021-07-12', 'MudanÃ§a no local de armazenamento.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-02-19', 'Novo exemplar fÃ­sico incluÃ­do.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2025-03-14', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'CapitÃ£es da Areia');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-05-05', 'Novo tÃ­tulo registrado.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-05-02', 'Livro duplicado removido.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-12-03', 'RevisÃ£o ortogrÃ¡fica registrada.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-02-05', 'Nova ediÃ§Ã£o substituiu anterior.', 'Dom Casmurro');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2023-07-13', 'AtualizaÃ§Ã£o da sinopse.', 'Frankenstein');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2025-01-02', 'AtualizaÃ§Ã£o de dados do autor.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-07-21', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-08-13', 'Livro removido por obsolescÃªncia.', 'Crime e Castigo');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-01-18', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2021-08-12', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2023-12-31', 'Livro removido por obsolescÃªncia.', 'Crime e Castigo');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-06-21', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-09-02', 'Livro duplicado removido.', 'Orgulho e Preconceito');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2022-11-15', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-07-29', 'InclusÃ£o de livro recÃ©m-adquirido.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-11-08', 'CorreÃ§Ã£o de ISBN.', 'Jogos Vorazes');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2021-12-02', 'Livro removido por obsolescÃªncia.', 'O Hobbit');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2021-02-14', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'DrÃ¡cula');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-01-27', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', 'Orgulho e Preconceito');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-04-25', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'O Senhor dos AnÃ©is');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2022-08-19', 'AtualizaÃ§Ã£o da sinopse.', 'A Menina que Roubava Livros');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-11-29', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-02-17', 'RemoÃ§Ã£o de exemplar danificado.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-03-01', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-01-29', 'AdiÃ§Ã£o de novo tÃ­tulo Ã  biblioteca.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2023-04-01', 'EdiÃ§Ã£o corrigida adicionada.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-08-23', 'RemoÃ§Ã£o de exemplar danificado.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2023-06-22', 'Livro duplicado removido.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2023-07-01', 'Livro duplicado removido.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2022-04-23', 'Livro removido por obsolescÃªncia.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2021-10-01', 'Livro duplicado removido.', 'A Menina que Roubava Livros');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-02-13', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Frankenstein');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2022-03-27', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Crime e Castigo');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-12-04', 'Novo tÃ­tulo registrado.', 'DrÃ¡cula');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-06-18', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Pequeno PrÃ­ncipe');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-09-02', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Senhor dos AnÃ©is');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2021-09-16', 'RemoÃ§Ã£o de exemplar danificado.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-10-12', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Harry Potter e a Pedra Filosofal');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2021-11-15', 'Nova ediÃ§Ã£o substituiu anterior.', 'Harry Potter e a Pedra Filosofal');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-02-29', 'AtualizaÃ§Ã£o de nÃºmero de pÃ¡ginas.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2022-08-28', 'Nova ediÃ§Ã£o substituiu anterior.', 'O Hobbit');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2024-10-22', 'AtualizaÃ§Ã£o de dados do autor.', 'A RevoluÃ§Ã£o dos Bichos');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-05-22', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Cem Anos de SolidÃ£o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2025-03-04', 'MudanÃ§a no local de armazenamento.', 'CapitÃ£es da Areia');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-02-02', 'Livro removido por obsolescÃªncia.', 'Frankenstein');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2023-09-13', 'Nova ediÃ§Ã£o substituiu anterior.', 'Dom Casmurro');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-04-28', 'AtualizaÃ§Ã£o de dados do autor.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-07-22', 'EdiÃ§Ã£o corrigida adicionada.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2025-04-20', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'O Hobbit');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-10-14', 'Novo tÃ­tulo registrado.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-08-16', 'RevisÃ£o ortogrÃ¡fica registrada.', 'Crime e Castigo');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2021-11-23', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', '1984');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2021-01-09', 'RemoÃ§Ã£o por baixa circulaÃ§Ã£o.', 'A Menina que Roubava Livros');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2022-06-05', 'CorreÃ§Ã£o na editora cadastrada.', 'Os MiserÃ¡veis');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-07-04', 'Livro removido por obsolescÃªncia.', 'O Nome do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2021-12-14', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'Orgulho e Preconceito');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2024-06-19', 'Novo livro adicionado ao acervo.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2021-07-07', 'CorreÃ§Ã£o de erro de digitaÃ§Ã£o no tÃ­tulo.', 'Harry Potter e a Pedra Filosofal');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-06-02', 'Novo livro adicionado ao acervo.', 'O CortiÃ§o');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2024-05-20', 'RevisÃ£o de classificaÃ§Ã£o de gÃªnero.', 'A Menina que Roubava Livros');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('CorreÃ§Ã£o', '2021-01-14', 'Novo exemplar fÃ­sico incluÃ­do.', 'A Sombra do Vento');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('ExclusÃ£o', '2022-12-03', 'Livro duplicado removido.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('AtualizaÃ§Ã£o', '2024-10-08', 'EdiÃ§Ã£o corrigida adicionada.', 'O Alquimista');
+INSERT INTO historico (TipoAlt, DatAlt, DescriAlt, ItemAdd) VALUES ('InserÃ§Ã£o', '2025-02-20', 'CorreÃ§Ã£o na editora cadastrada.', 'Harry Potter e a Pedra Filosofal');
 
 
 create table avaliacao(
