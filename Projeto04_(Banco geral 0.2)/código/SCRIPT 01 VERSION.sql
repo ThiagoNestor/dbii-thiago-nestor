@@ -9,6 +9,96 @@ CREATE TABLE IMOVEL (
     propret TEXT,
     valor DECIMAL(12,2)
 );
+
+CREATE TABLE IMOBILIARIA (
+    cnpj INT PRIMARY KEY,
+    nome VARCHAR(100),
+    ende TEXT,
+    email VARCHAR(100),
+    aval INT check (aval BETWEEN 1 AND 5) 
+);
+
+CREATE TABLE REGISTRO (
+    id_registro INT PRIMARY KEY,
+    data_registro DATE,
+    local TEXT,
+    preco INT,
+    id_imovel INT,
+    cnpj INT,
+    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel),
+    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
+);
+
+CREATE TABLE ANUNCIA (
+    id_imovel INT,
+    cnpj INT,
+    data_anuncio DATE,
+    PRIMARY KEY (id_imovel, cnpj),
+    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel),
+    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
+);
+
+CREATE TABLE SITE (
+    url VARCHAR(100) PRIMARY KEY,
+    nome VARCHAR(100),
+    emailcontt VARCHAR(100),
+    descri TEXT,
+    id int 
+);
+
+CREATE TABLE ENTREGA (
+    url VARCHAR(100),
+    cnpj INT,
+    data_entrega DATE,
+    PRIMARY KEY (url, cnpj),
+    FOREIGN KEY (url) REFERENCES SITE(url),
+    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
+);
+
+CREATE TABLE CLIENTE (
+    cpf VARCHAR(14) PRIMARY KEY UNIQUE,
+    nome VARCHAR(100),
+    ende TEXT,
+    email VARCHAR(100),
+    senha VARCHAR(100)
+);
+
+CREATE TABLE PROPOSTA (
+    id_proposta INT PRIMARY KEY,
+    valor DECIMAL(12,2),
+    dat DATE,
+    proponente VARCHAR(100),
+    emailcontt VARCHAR(100),
+    resgprost VARCHAR(100)
+);
+
+CREATE TABLE FAZ (
+    cpf VARCHAR(14),
+    id_proposta INT,
+    PRIMARY KEY (cpf, id_proposta),
+    FOREIGN KEY (cpf) REFERENCES CLIENTE(cpf),
+    FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta)
+);
+
+CREATE TABLE COMPRA (
+    id_compra INT PRIMARY KEY auto_increment,
+    id_proposta INT,
+    id_imovel INT,
+    valpag DECIMAL(12,2),
+    nomecomprad VARCHAR(100),
+    metpag TEXT,
+    data_compra DATE,
+    FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta),
+    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel)
+);
+
+---
+ALTER TABLE IMOVEL ADD quartos INT;
+
+ALTER TABLE IMOVEL ADD cnpj INT;
+ALTER TABLE IMOVEL;
+
+---
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VALUES (6001, 'Rua do Comércio, 222, Centro', 'Apartamento', 'Residencial', 466000, 321, 4970);
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VALUES (6002, 'Avenida Brasil, 362, Copacabana', 'Apartamento', 'Comercial', 204000, 12, 0161);
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VALUES (6003, 'Travessa do Sol, 118, Ipanema', 'Kitnet', 'Comercial', 419000, 257, 4970);
@@ -210,15 +300,6 @@ INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VA
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VALUES (6199, 'Alameda Central, 215, Moema', 'Studio', 'Misto', 325000, 82, 4970);
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor, quartos, cnpj) VALUES (6200, 'Travessa do Sol, 470, Pinheiros', 'Casa', 'Residencial', 470000, 147, 0161);
 
-
-
-CREATE TABLE IMOBILIARIA (
-    cnpj INT PRIMARY KEY,
-    nome VARCHAR(100),
-    ende TEXT,
-    email VARCHAR(100),
-    aval INT check (aval BETWEEN 1 AND 5) 
-);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (4970, 'Cassiano', 'Aeroporto de Guerra, Acaiaca, 60150472 Silva / PI', 'rochaapollo@example.net', 1);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (0161, 'Silva', 'Praça Camargo, 43, Conjunto Bonsucesso, 56312871 da Rosa / SP', 'heitorcasa-grande@example.org', 2);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (4522, 'Vargas e Filhos', 'Alameda Murilo Viana, 5, Alípio De Melo, 54067-969 Câmara da Prata / RR', 'casa-grandearthur-miguel@example.com', 1);
@@ -520,17 +601,6 @@ INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (236297, 'Rocha -
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (617298, 'Brito Fonseca e Filhos', 'Sítio Vinícius da Luz, Conjunto Paulo Vi, 88750-777 da Mata Verde / MA', 'hgoncalves@example.org', 4);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (259299, 'Barbosa e Filhos', 'Núcleo Novaes, 494, Europa, 22902092 Monteiro / RR', 'bento71@example.com', 4);
 
-
-CREATE TABLE REGISTRO (
-    id_registro INT PRIMARY KEY,
-    data_registro DATE,
-    local TEXT,
-    preco INT,
-    id_imovel INT,
-    cnpj INT,
-    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel),
-    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
-);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (595, '2026-01-29', 'Parque Sol', 3256);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (323, '2026-12-05', 'Jardim América', 5430);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (671, '2026-07-25', 'Parque Estrela', 3688);
@@ -832,22 +902,6 @@ INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (752, '20
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (914, '2026-08-28', 'Parque Estrela', 4459);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (832, '2026-12-15', 'Vila Aurora', 3961);
 
-CREATE TABLE ANUNCIA (
-    id_imovel INT,
-    cnpj INT,
-    data_anuncio DATE,
-    PRIMARY KEY (id_imovel, cnpj),
-    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel),
-    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
-);
-
-CREATE TABLE SITE (
-    url VARCHAR(100) PRIMARY KEY,
-    nome VARCHAR(100),
-    emailcontt VARCHAR(100),
-    descri TEXT,
-    id int 
-);
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('nvu0q', 526, 'Djime', 'djime@gmail.com', 'Teste online web comunidade site blog teste.');
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('0tzh9eo7x', 146, 'Ousinesbw', 'ousinesbw@gmail.com', 'Portal blog plataforma blog teste site desenvolvimento.');
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('f0gdf', 134, 'Ssatdskt', 'ssatdskt@gmail.com', 'Rede digital site tecnologia digital digital dados.');
@@ -1149,23 +1203,6 @@ INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('7syapiv', 254, 'So
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('joz4i4n91j58jmq', 624, 'Calqxmqx', 'calqxmqx@gmail.com', 'Mídia rede digital web inovação desenvolvimento web desenvolvimento.');
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('52ardwgq', 252, 'Fstyyqyhga', 'fstyyqyhga@gmail.com', 'Blog teste online desenvolvimento digital plataforma rede mídia serviço inovação.');
 
-
-CREATE TABLE ENTREGA (
-    url VARCHAR(100),
-    cnpj INT,
-    data_entrega DATE,
-    PRIMARY KEY (url, cnpj),
-    FOREIGN KEY (url) REFERENCES SITE(url),
-    FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
-);
-
-CREATE TABLE CLIENTE (
-    cpf VARCHAR(14) PRIMARY KEY UNIQUE,
-    nome VARCHAR(100),
-    ende TEXT,
-    email VARCHAR(100),
-    senha VARCHAR(100)
-);
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('41386720950', 'Enzo Mendes', 'Colônia de Guerra, Buritis, 24091970 Cavalcanti do Norte / ES', 'jda-paz@example.com', '^Dt3SB%i^*');
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('25134789673', 'Theodoro Sales', 'Passarela Monteiro, 243, Jaraguá, 17030146 Costa / ES', 'usa@example.com', 'r2X+qC$n_W');
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('69574180220', 'Luiz Gustavo Moura', 'Alameda Liz Porto, 22, São Cristóvão, 04237-661 Silva / RS', 'joaopires@example.com', 'G&3Kh4xK6f');
@@ -1467,15 +1504,6 @@ INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('85392614051', 'Ana 
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('07423819603', 'Mariane Novais', 'Vale Manuella Casa Grande, 3, Comiteco, 38728-845 Costela de Moraes / AM', 'nda-rosa@example.org', 'w&Y*pqmU*5');
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('84697213564', 'Maria Julia Pacheco', 'Via de Costela, 21, Jardim Guanabara, 55753145 Sampaio do Oeste / TO', 'icastro@example.com', 'xe%Mg4xz_8');
 
-
-CREATE TABLE PROPOSTA (
-    id_proposta INT PRIMARY KEY,
-    valor DECIMAL(12,2),
-    dat DATE,
-    proponente VARCHAR(100),
-    emailcontt VARCHAR(100),
-    resgprost VARCHAR(100)
-);
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (1130, 213737.45, '2024-07-27', 'Sr. Pedro da Costa', 'ana-laura31@example.org', 'Recusada');
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (6411, 472203.42, '2022-12-09', 'Isaque Fogaça', 'psilva@example.org', 'Aceita');
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (5682, 295209.81, '2023-10-22', 'Maria Júlia da Mata', 'vinicius72@example.net', 'Recusada');
@@ -1777,26 +1805,6 @@ INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (335298, 351493.58, '2021-01-03', 'Dr. Erick Silva', 'emachado@example.org', 'Recusada');
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (562299, 293382.33, '2022-07-21', 'Ágatha Sá', 'heitor92@example.net', 'Em Análise');
 
-
-CREATE TABLE FAZ (
-    cpf VARCHAR(14),
-    id_proposta INT,
-    PRIMARY KEY (cpf, id_proposta),
-    FOREIGN KEY (cpf) REFERENCES CLIENTE(cpf),
-    FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta)
-);
-
-CREATE TABLE COMPRA (
-    id_compra INT PRIMARY KEY auto_increment,
-    id_proposta INT,
-    id_imovel INT,
-    valpag DECIMAL(12,2),
-    nomecomprad VARCHAR(100),
-    metpag TEXT,
-    data_compra DATE,
-    FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta),
-    FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel)
-);
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (270164.4, 'Pedro Henrique', 'Cartão de Débito');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (253386.79, 'Rafael Santos', 'PIX');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (545225.57, 'André Silva', 'Cartão de Débito');
@@ -2097,39 +2105,3 @@ INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (505801.34, 'Amanda Pere
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (825202.31, 'Rafael Santos', 'Transferência');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (830371.65, 'Rafael Santos', 'Dinheiro');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (469373.44, 'André Silva', 'Cartão de Débito');
-
----
-ALTER TABLE IMOVEL ADD quartos INT;
-
----
-ALTER TABLE IMOVEL ADD cnpj INT;
-ALTER TABLE IMOVEL 
-ADD CONSTRAINT fk_imovel_imobiliaria
-FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj);
-
----
-SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(endereco, '/', -1), ' ', 1) AS cidade, COUNT(*) AS qtd_imoveis
-FROM IMOVEL
-GROUP BY cidade;
-
----
-SELECT AVG(valor) AS media_preco_venda
-FROM IMOVEL;
-
----
-SELECT nomecomprad, COUNT(id_imovel) AS qtd_compras
-FROM COMPRA
-GROUP BY nomecomprad
-HAVING COUNT(id_imovel) > 1;
-
----
-SELECT COUNT(*) AS qtd_imoveis
-FROM IMOVEL
-WHERE quartos >= 3;
-
----
-SELECT cnpj, COUNT(*) AS qtd_imoveis
-FROM IMOVEL
-GROUP BY cnpj
-ORDER BY qtd_imoveis DESC
-LIMIT 1;
